@@ -1,0 +1,64 @@
+<br>
+<div class="container">
+      <h1>Upload Files</h1>
+      <div class="banner">
+            <input type="file" name="photo" ng2FileSelect [uploader]="uploader" multiple accept="image/*" />
+            <br>
+            <br>
+            <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                  Upload
+            </button>
+            <button type="button" class="btn btn-success btn-s" (click)="onBack()">Back
+            </button>
+      </div>
+      <br>
+      <br>
+      <div>
+            <div class="row">
+                  <div class="col-md-7">
+                        <strong> Name </strong>
+                  </div>
+                  <div class="col-md-2">
+                        <strong> Size </strong>
+                  </div>
+                  <div class="col-md-2">
+                        <strong> Progress </strong>
+                  </div>
+                  <div class="col-md-1">
+                        <strong> Action </strong>
+                  </div>
+            </div>
+
+            <div class="row" *ngFor="let item of uploader.queue">
+                  <div class="col-md-7">{{ item?.file?.name }}</div>
+                  <div class="col-md-2">{{ item?.file?.size/1024/1024 | number:'.2' }} MB</div>
+                  <div class="col-md-2">
+
+                        <div class="progress" style="margin-bottom: 0;">
+                              <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                        </div>
+                  </div>
+                  <div class="col-md-1">
+                        <i class="fa fa-times-circle" (click)="item.remove()"></i>
+                  </div>
+            </div>
+            <div>
+                  <br>
+                  <div>
+                        Queue progress:
+                        <div class="progress">
+                              <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                        </div>
+                  </div>
+                  <br>
+                  <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                        <span class="glyphicon glyphicon-upload"></span> Upload all
+                  </button>
+                  <!-- <button type="button" class="btn btn-warning btn-s" (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                  </button> -->
+                  <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                        <span class="glyphicon glyphicon-trash"></span> Remove all
+                  </button>
+            </div>
+      </div>
