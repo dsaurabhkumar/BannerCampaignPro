@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FileSelectDirective } from 'ng2-file-upload';
 import {ProgressBarModule} from "angular-progress-bar";
 
@@ -14,7 +16,8 @@ import { BannerComponent } from './banner/banner.component';
 import { CampaignComponent } from './campaign/campaign.component';
 import { LogoutComponent } from './logout/logout.component';
 import { UploadimageComponent } from './uploadimage/uploadimage.component';
-import { ServiceService } from './service.service';
+import { DataService } from './data.service';
+import { CampViewComponent } from './camp-view/camp-view.component';
 
 
 @NgModule({
@@ -26,16 +29,20 @@ import { ServiceService } from './service.service';
     CampaignComponent,
     LogoutComponent,
     UploadimageComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    CampViewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
-    ProgressBarModule
+    HttpModule,
+    ProgressBarModule,
+    BrowserAnimationsModule
   ],
-  providers: [ServiceService],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
