@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 const mongoose= require('mongoose');
-const db="mongodb://@localhost:27017/adsBanner";
+const db="mongodb://user1:user1@ds135399.mlab.com:35399/adsbanner";
 mongoose.Promise = global.Promise;
 mongoose.connect(db, function(err){
     if(err) throw err;

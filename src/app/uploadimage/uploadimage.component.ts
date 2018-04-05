@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ServiceService } from '../service.service';
 
 @Component({
   selector: 'app-uploadimage',
@@ -9,10 +8,9 @@ import { ServiceService } from '../service.service';
 export class UploadimageComponent implements OnInit {
 
   message : string;
-  constructor(private service: ServiceService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.service.currentMessage.subscribe(message => this.message = message);
   }
 
 }
