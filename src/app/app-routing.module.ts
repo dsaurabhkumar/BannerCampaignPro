@@ -7,6 +7,7 @@ import { CampaignComponent } from './campaign/campaign.component';
 import { LogoutComponent } from './logout/logout.component';
 import { UploadimageComponent } from './uploadimage/uploadimage.component';
 import { CampViewComponent } from './camp-view/camp-view.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path:'campaign', component: CampaignComponent},
   {path:'logout', component: LogoutComponent},
   {path:'uploadimage', component: UploadimageComponent},
-  {path:'camp-view', component: CampViewComponent}
+  {path:'camp-view', component: CampViewComponent},
+  {path:'register', component: RegisterComponent}
 ];
 
 @NgModule({

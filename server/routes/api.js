@@ -3,19 +3,15 @@ const router = express.Router();
 
 
 const mongoose= require('mongoose');
-<<<<<<< HEAD
 // const db="mongodb://@localhost:27017/adsBanner";
 const db="mongodb://user1:user1@ds135399.mlab.com:35399/adsbanner";
 
-=======
-const db="mongodb://user1:user1@ds135399.mlab.com:35399/adsbanner";
->>>>>>> 66e6594eb2d1a16a6795528217806166c54aabff
 mongoose.Promise = global.Promise;
 mongoose.connect(db, function(err){
     if(err) throw err;
     else
     console.log('db connected');
-})
+});
 
 router.get('/', function(request, response){
     response.send(" / get route Api Works");

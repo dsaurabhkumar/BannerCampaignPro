@@ -5,7 +5,8 @@ const path = require('path');
 const api = require('./server/routes/api');
 const login = require('./server/routes/login');
 const banner = require('./server/routes/banner');
-
+const register = require('./server/routes/register');
+const uploadimage = require('./server/routes/uploadimage');
 
 const port = 3000;
 const app = express();
@@ -26,6 +27,8 @@ app.use(function (req, res, next) {
 app.use('/', api);
 app.use('/login', login);
 app.use('/banner', banner);
+app.use('/register', register);
+api.use('/uploadimage', uploadimage);
 
 
 app.get('*', (request, response) => {

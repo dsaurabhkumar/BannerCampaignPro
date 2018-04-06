@@ -18,6 +18,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { UploadimageComponent } from './uploadimage/uploadimage.component';
 import { DataService } from './data.service';
 import { CampViewComponent } from './camp-view/camp-view.component';
+import { RegisterComponent } from './register/register.component';
+import { ImageService } from './image.service';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { CampViewComponent } from './camp-view/camp-view.component';
     LogoutComponent,
     UploadimageComponent,
     FileSelectDirective,
-    CampViewComponent
+    CampViewComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,7 @@ import { CampViewComponent } from './camp-view/camp-view.component';
     ProgressBarModule,
     BrowserAnimationsModule
   ],
-  providers: [DataService],
+  providers: [DataService, ImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

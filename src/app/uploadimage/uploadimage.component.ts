@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ImageService } from '../image.service';
 
 @Component({
   selector: 'app-uploadimage',
@@ -7,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UploadimageComponent implements OnInit {
 
-  message : string;
-  constructor() { }
+  images = [];
+  message: string;
+  constructor(private _imageService: ImageService) { }
 
   ngOnInit() {
+    this._imageService.getImages()
+      .subscribe(ImageData => this.images = ImageData);
   }
 
 }

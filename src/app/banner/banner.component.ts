@@ -4,7 +4,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import "rxjs/add/operator/map";
 import { Observable } from 'rxjs/Observable';
-import {  FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { Http, Response } from '@angular/http';
 
 const URL = 'http://localhost:3000/banner/';
@@ -16,21 +16,25 @@ const URL = 'http://localhost:3000/banner/';
 export class BannerComponent implements OnInit {
 
   //To upload image
-  public uploader:FileUploader = new FileUploader({url: URL, itemAlias: 'photo'});
+  public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'photo' });
 
-  onBack(){
+  onBack() {
     this.router.navigate(['/dashboard']);
+  }
+
+  showAll() {
+    this.router.navigate(['/uploadimage']);
   }
 
   constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit() {
     //To upload image
-    this.uploader.onAfterAddingFile = (file)=> { file.withCredentials = false; };
-    this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
+    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       console.log("ImageUpload:uploaded:", item, status, response);
     }
   }
 
-  
+
 }
