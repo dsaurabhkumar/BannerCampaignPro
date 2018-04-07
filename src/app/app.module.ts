@@ -18,6 +18,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { UploadimageComponent } from './uploadimage/uploadimage.component';
 import { DataService } from './data.service';
 import { CampViewComponent } from './camp-view/camp-view.component';
+import { CampListComponent } from './camp-list/camp-list.component';
+import { TestComponent } from './test/test.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { CampViewComponent } from './camp-view/camp-view.component';
     LogoutComponent,
     UploadimageComponent,
     FileSelectDirective,
-    CampViewComponent
+    CampViewComponent,
+    CampListComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

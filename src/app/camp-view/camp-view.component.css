@@ -51,3 +51,20 @@ h6{
 .alignCenter {
     text-align: center;
 }
+
+.setMarginBtmO {
+    margin-bottom: 0px;
+}
+
+.remColor {
+    color: red;
+    float: right;
+}
+
+p:hover{
+    font-size: larger;
+    background-color: lightgrey;
+}
+i:hover {
+    cursor: pointer;
+}
