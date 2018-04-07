@@ -8,6 +8,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { UploadimageComponent } from './uploadimage/uploadimage.component';
 import { CampViewComponent } from './camp-view/camp-view.component';
 import { TestComponent } from './test/test.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:'uploadimage', component: UploadimageComponent},
   {path:'camp-view', component: CampViewComponent},
   {path:'test', component: TestComponent},
+  {path:'register', component: RegisterComponent}
 ];
 
 @NgModule({

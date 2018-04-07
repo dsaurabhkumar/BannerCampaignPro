@@ -8,8 +8,12 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  onLogin(){
+  onLogin() {
     this.router.navigate(['/dashboard']);
+  }
+
+  onRegister() {
+    this.router.navigate(['/register']);
   }
 
   constructor(private router: Router) { }

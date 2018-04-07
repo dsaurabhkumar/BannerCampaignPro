@@ -20,6 +20,8 @@ import { DataService } from './data.service';
 import { CampViewComponent } from './camp-view/camp-view.component';
 import { CampListComponent } from './camp-list/camp-list.component';
 import { TestComponent } from './test/test.component';
+import { RegisterComponent } from './register/register.component';
+import { ImageService } from './image.service';
 
 
 @NgModule({
@@ -34,7 +36,8 @@ import { TestComponent } from './test/test.component';
     FileSelectDirective,
     CampViewComponent,
     CampListComponent,
-    TestComponent
+    TestComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,7 @@ import { TestComponent } from './test/test.component';
     ProgressBarModule,
     BrowserAnimationsModule
   ],
-  providers: [DataService],
+  providers: [DataService, ImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
