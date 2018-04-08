@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const User = require('../../banner');
 
 const db = "mongodb://user1:user1@ds135399.mlab.com:35399/adsbanner";
 
@@ -19,9 +20,10 @@ router.get('/getImages', function (req, res) {
                 console.log('Error retrieving Images');
             } else {
                 console.log(photos);
-                // res.json(photos);
+                res.json(photos);
             }
         });
+    // res.json({ "value": "sdkfjlksjflds"});
 });
 
 

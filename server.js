@@ -35,6 +35,7 @@ api.use('/uploadimage', uploadimage);
 
 app.get('*', (request, response) => {
     response.sendFile(path.join(__dirname, 'dist/index.html'));
+    // response.send("no routex");
 });
 
 app.listen(port, function () {

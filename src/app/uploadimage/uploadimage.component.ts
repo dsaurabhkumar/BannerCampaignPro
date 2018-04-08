@@ -8,13 +8,12 @@ import { ImageService } from '../image.service';
 })
 export class UploadimageComponent implements OnInit {
 
-  images = [];
+  public images: any;
   message: string;
   constructor(private _imageService: ImageService) { }
 
   ngOnInit() {
-    this._imageService.getImages()
-      .subscribe(ImageData => this.images = ImageData);
+    this._imageService.getImages().subscribe(response => this.images = response)
   }
 
 }
