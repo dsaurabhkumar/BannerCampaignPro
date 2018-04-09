@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+var logger = require('morgan');
 
 const api = require('./server/routes/api');
 const login = require('./server/routes/login');
@@ -11,6 +12,7 @@ const uploadimage = require('./server/routes/uploadimage');
 const port = 3000;
 const app = express();
 
+app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -33,6 +35,7 @@ api.use('/uploadimage', uploadimage);
 
 app.get('*', (request, response) => {
     response.sendFile(path.join(__dirname, 'dist/index.html'));
+    // response.send("no routex");
 });
 
 app.listen(port, function () {

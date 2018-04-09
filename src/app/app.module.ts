@@ -18,6 +18,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { UploadimageComponent } from './uploadimage/uploadimage.component';
 import { DataService } from './data.service';
 import { CampViewComponent } from './camp-view/camp-view.component';
+import { CampListComponent } from './camp-list/camp-list.component';
+import { TestComponent } from './test/test.component';
 import { RegisterComponent } from './register/register.component';
 import { ImageService } from './image.service';
 
@@ -33,6 +35,8 @@ import { ImageService } from './image.service';
     UploadimageComponent,
     FileSelectDirective,
     CampViewComponent,
+    CampListComponent,
+    TestComponent,
     RegisterComponent
   ],
   imports: [

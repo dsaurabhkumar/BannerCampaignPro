@@ -1,5 +1,17 @@
-
-
-<h3>
-  Uploadimage Componenet Works !!!
-</h3>
+<!-- <p *ngFor="let image of images"> {{image.fileName}}</p> -->
+  <div class="table table-bordered">
+    <div class="row">
+      <div class="col-3">Id</div>
+      <div class="col-3">File Name</div>
+      <div class="col-3">Size</div>
+      <div class="col-3">Path</div>
+    </div>
+    <div class="row" *ngFor="let image of images">
+      <div class="col-3"> {{image._id}}</div>
+      <div class="col-3"> {{image.fileName}}</div>
+      <div class="col-3"> {{image.size}}</div>
+      <!-- <div class="col-3"> {{image.path}}</div> -->
+      <div class="col-3">
+        <img [src]="image.path" alt="Image" height="300" width="300"> </div>
+    </div>
+  </div>

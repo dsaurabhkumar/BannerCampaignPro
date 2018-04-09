@@ -1,13 +1,13 @@
 <br>
 <div>
   <h6>Campaign Settings</h6>
-  <form>
+  <form [formGroup]="campForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="col-md-6">
         <div class="row">
           <label for="" class="col-md-3 col-form-label"> Campaign name:</label>
           <div class="col-md-9">
-            <input type="text" class="form-control " name="campName" [(ngModel)]="campTitle">
+            <input type="text" class="form-control form-control-sm" name="campName" formControlName="campTitle" [value]="campTitle">
           </div>
         </div>
       </div>
@@ -15,12 +15,12 @@
         <div class="row form-group">
           <label for="" class="col-md-3 col-form-label"> Geo targeting:</label>
           <div class="col-md-9 multiSelectContainer">
-            <button (click)="openCountryListBtnClick()">{{(selectedCountries.length) ? selectedCountries.length + " Selected" : "Nothig Selected"}}</button>
+            <button type="button" (click)="openCountryListBtnClick()" ngDefaultControl formControlName="selectedCountries">{{(selectedCountries.length) ? selectedCountries.length + " Selected" : "Nothig Selected"}}</button>
             <div *ngIf="openCountryList" class="col-12">
               <div>
                 <div class="alignCenter">
-                  <button (click)="selectAllCoutries()">Select All</button>
-                  <button (click)="deSelectAllCoutries()">Deselect All</button>
+                  <button type="button" (click)="selectAllCoutries()">Select All</button>
+                  <button type="button" (click)="deSelectAllCoutries()">Deselect All</button>
                 </div>
                 <ul>
                   <li *ngFor="let country of countries;index as i" (click)="addCountryCheckMark(i)">
@@ -40,7 +40,7 @@
         <div class="row form-group">
           <label for="" class="col-md-3 col-form-label">Size:</label>
           <div class="col-md-9">
-            <input type="text" class="form-control " name="size" placeholder="Enter file size">
+            <input type="text" class="form-control input-sm" name="size" placeholder="Enter file size">
           </div>
         </div>
       </div>
@@ -48,12 +48,12 @@
         <div class="row form-group">
           <label for="" class="col-md-3 col-form-label">Device targeting:</label>
           <div class="col-md-9 multiSelectContainer">
-            <button (click)="openDeviceListBtnClick()">{{(selectedDevices.length) ? selectedDevices.length + " Selected" : "Nothig Selected"}}</button>
+            <button type="button" (click)="openDeviceListBtnClick()" ngDefaultControl formControlName="selectedDevices">{{(selectedDevices.length) ? selectedDevices.length + " Selected" : "Nothig Selected"}}</button>
             <div *ngIf="openDeviceList" class="col-md-12">
               <div style="width: 100%">
                 <div class="alignCenter">
-                  <button (click)="selectAllDevice()">Select All</button>
-                  <button (click)="deSelectAllDevice()">Deselect All</button>
+                  <button type="button" (click)="selectAllDevice()">Select All</button>
+                  <button type="button" (click)="deSelectAllDevice()">Deselect All</button>
                 </div>
                 <ul>
                   <li *ngFor="let device of devices;index as i" (click)="addDeviceCheckMark(i)">
@@ -71,14 +71,14 @@
     <div class="row">
       <div class="col-md-6">
         <div class="row form-group">
-          <label for="" class="col-md-3 col-form-label">Active hours:</label>
+          <label for="" class="col-md-3 col-form-label" ngDefaultControl formControlName="selectedHours">Active hours:</label>
           <div class="col-md-9 multiSelectContainer">
-            <button (click)="openHrsListBtnClick()">{{(selectedHours.length) ? selectedHours.length + " Selected" : "Nothing Selected"}}</button>
+            <button type="button" (click)="openHrsListBtnClick()">{{(selectedHours.length) ? selectedHours.length + " Selected" : "Nothing Selected"}}</button>
             <div *ngIf="openHrsList" class="col-12">
               <div style="width: 100%">
                 <div class="alignCenter">
-                  <button (click)="selectAllhours()">Select All</button>
-                  <button (click)="deSelectAllhours()">Deselect All</button>
+                  <button type="button" (click)="selectAllhours()">Select All</button>
+                  <button type="button" (click)="deSelectAllhours()">Deselect All</button>
                 </div>
                 <ul>
                   <li *ngFor="let hour of hours;index as i" (click)="addHoursCheckMark(i)">
@@ -92,36 +92,38 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div class="row form-group">
-          <label for="" class="col-md-3 col-form-label">OS targeting:</label>
-          <div class="col-md-9 multiSelectContainer">
-            <button (click)="openOsListBtnClick()">{{ (selectedOsDesktop.length + selectedOsMobile.length) ? (selectedOsDesktop.length + selectedOsMobile.length)
-              + " Selected" : "Nothing Selected" }}</button>
-            <div *ngIf="openOsList" class="col-12">
-              <div style="width: 100%">
-                <div class="alignCenter">
-                  <button (click)="selectAllOs()">Select All</button>
-                  <button (click)="deSelectAllOs()">Deselect All</button>
+        <fieldset formGroupName="os">
+          <div class="row form-group">
+            <label for="" class="col-md-3 col-form-label">OS targeting:</label>
+            <div class="col-md-9 multiSelectContainer">
+              <button type="button" (click)="openOsListBtnClick()">{{ (selectedOsDesktop.length + selectedOsMobile.length) ? (selectedOsDesktop.length + selectedOsMobile.length)
+                + " Selected" : "Nothing Selected" }}</button>
+              <div *ngIf="openOsList" class="col-12">
+                <div style="width: 100%">
+                  <div class="alignCenter">
+                    <button type="button" (click)="selectAllOs()">Select All</button>
+                    <button type="button" (click)="deSelectAllOs()">Deselect All</button>
+                  </div>
+                  <ul>
+                    <p>Desktop OS</p>
+                    <hr>
+                    <li *ngFor="let os of osListDesktop;index as i" (click)="addOsCheckMark_dstp(i)">
+                      {{ os.desktopOs}}
+                      <i class="fa fa-check" *ngIf="os.select"></i>
+                    </li>
+                    <hr>
+                    <p>Mobile OS</p>
+                    <hr>
+                    <li *ngFor="let os of osListMobile;index as i" (click)="addOsCheckMark_mob(i)">
+                      {{os.mobileOs}}
+                      <i class="fa fa-check" *ngIf="os.select"></i>
+                    </li>
+                  </ul>
                 </div>
-                <ul>
-                  <p>Desktop OS</p>
-                  <hr>
-                  <li *ngFor="let os of osListDesktop;index as i" (click)="addOsCheckMark_dstp(i)">
-                    {{ os.desktopOs}}
-                    <i class="fa fa-check" *ngIf="os.select"></i>
-                  </li>
-                  <hr>
-                  <p>Mobile OS</p>
-                  <hr>
-                  <li *ngFor="let os of osListMobile;index as i" (click)="addOsCheckMark_mob(i)">
-                    {{os.mobileOs}}
-                    <i class="fa fa-check" *ngIf="os.select"></i>
-                  </li>
-                </ul>
               </div>
             </div>
           </div>
-        </div>
+        </fieldset>
       </div>
     </div>
 
@@ -130,7 +132,7 @@
         <div class="row">
           <label for="" class="col-md-3 col-form-label">Campaign start date:</label>
           <div class="col-md-9">
-            <input type="date" class="form-control " name="campStartDate">
+            <input type="date" class="form-control input-sm" name="campStartDate" ngDefaultControl formControlName="campStartDate">
           </div>
         </div>
       </div>
@@ -146,13 +148,13 @@
         <div class="row form-group">
           <label for="" class="col-md-3 col-form-label">Browser targeting:</label>
           <div class="col-md-9 multiSelectContainer">
-            <button (click)="openBrowserListBtnClick()">{{ (selectedBrowserDesktop.length + selectedBrowserMobile.length) ? (selectedBrowserDesktop.length + selectedBrowserMobile.length)
+            <button type="button" (click)="openBrowserListBtnClick()">{{ (selectedBrowserDesktop.length + selectedBrowserMobile.length) ? (selectedBrowserDesktop.length + selectedBrowserMobile.length)
               + " Selected" : "Nothing Selected" }}</button>
             <div *ngIf="openBrowserList" class="col-12">
               <div style="width: 100%">
                 <div class="alignCenter">
-                  <button (click)="selectAllBrowser()">Select All</button>
-                  <button (click)="deSelectAllBrowser()">Deselect All</button>
+                  <button type="button" (click)="selectAllBrowser()">Select All</button>
+                  <button type="button" (click)="deSelectAllBrowser()">Deselect All</button>
                 </div>
                 <ul>
                   <p>Desktop Browser</p>
@@ -181,7 +183,7 @@
         <div class="row">
           <label for="" class="col-md-3 col-form-label">Campaign stop date:</label>
           <div class="col-md-9">
-            <input type="date" class="form-control " name="campStopDate">
+            <input type="date" class="form-control input-sm" name="campStopDate" ngDefaultControl formControlName="campEndDate">
           </div>
         </div>
       </div>
@@ -189,7 +191,7 @@
         <div class="row form-group">
           <label for="" class="col-md-3 col-form-label">Campaign link:</label>
           <div class="col-md-9">
-            <input type="text" class="form-control " name="browserTarget">
+            <input type="text" class="form-control input-sm" name="browserTarget">
           </div>
         </div>
       </div>
@@ -202,18 +204,25 @@
         <div class="row">
           <label for="" class="col-md-3 col-form-label">To NOT show the campaign at the following sites:</label>
           <div class="col-md-9">
-            <input type="text" class="form-control " name="campStopDate">
+            <input type="text" class="form-control " name="site" placeholder="Enter Site to Avoid" [(ngModel)]="banSite" [ngModelOptions]="{standalone: true}">
+            <p *ngFor="let site of banSiteList; index as i" class="setMarginBtmO">{{site}}
+              <i class="fa fa-remove remColor" (click)="delBanSite($event, i)"></i>
+            </p>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row form-group">
+          <!-- <label for="" class="col-md-3 col-form-label">Campaign link:</label> -->
+          <div class="col-md-3">
+            <button type="button" class="btn btn-secondary" (click)="banSites()">Add</button>
+          </div>
+          <div class="col-md-9">
+            <!-- <input type="text" class="form-control " name="browserTarget"> -->
           </div>
         </div>
       </div>
-      <!-- <div class="col-md-6">
-              <div class="row form-group">
-                <label for="" class="col-md-3 col-form-label">Campaign link:</label>
-                <div class="col-md-9">
-                  <input type="text" class="form-control " name="browserTarget">
-                </div>
-              </div>
-            </div> -->
     </div>
 
     <div class="alert alert-warning fade show" *ngIf="removeCampAlert">
@@ -221,11 +230,14 @@
     </div>
 
     <div class="card-footer text-center">
-      <button class="btn btn-danger pull-left" (click)="removeCampaign()">
+      <button type="button" class="btn btn-danger pull-left" (click)="removeCampaign()">
         <i class="fa fa-trash-o"></i> Remove campaign</button>
-      <button class="btn btn-success"> Banner</button>
-      <button class="btn btn-success pull-right">
+      <button type="button" class="btn btn-success"> Banner</button>
+      <button type="submit" class="btn btn-success pull-right">
         <i class="fa fa-check"></i> Save campaign</button>
     </div>
   </form>
 </div>
+
+
+<pre>{{campForm.value | json}}</pre>

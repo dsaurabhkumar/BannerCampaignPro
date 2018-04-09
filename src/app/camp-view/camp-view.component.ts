@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'camp-view',
@@ -31,6 +32,12 @@ export class CampViewComponent implements OnInit {
   openBrowserList: boolean = false;
   browserListMobile = [];
   selectedBrowserMobile = [];
+
+  private campStartDate;
+  private campEndDate;
+
+  banSite = "";
+  banSiteList: string[] = [];
 
 
   constructor(private _data: DataService) {
@@ -95,58 +102,118 @@ export class CampViewComponent implements OnInit {
       for (let i = 0; i < this.browserListMobile.length; i++) {
         this.selectedBrowserMobile.push(this.browserListMobile[i].mobileBrowser);
       }
-    })
+    });
+
+
+    this.campForm = new FormGroup({
+      campTitle: new FormControl(this.campTitle),
+      selectedCountries: new FormControl(),
+      selectedDevices: new FormControl(),
+      selectedHours: new FormControl(),
+      os: new FormGroup({
+        desktop: new FormControl(),
+        mobile: new FormControl()
+      }),
+      browser: new FormGroup({
+        desktop: new FormControl(),
+        mobile: new FormControl()
+      }),
+      campStartDate: new FormControl(),
+      campEndDate: new FormControl(),
+      banSiteList: new FormControl()    
+  });
+
 
   }  // *********************** ngOnInit ends here ***********************
+  campForm: FormGroup;
+  onSubmit() {
+    console.log(this.selectedOsMobile);
+    if (this.campForm.valid) {
+      this.campForm.value.selectedCountries = this.selectedCountries;
+      this.campForm.value.selectedDevices = this.selectedDevices;
+      this.campForm.value.selectedHours = this.selectedHours;
+      this.campForm.value.os.desktop = this.selectedOsDesktop;
+      this.campForm.value.os.mobile = this.selectedOsMobile;
+      this.campForm.value.browser.desktop = this.selectedBrowserDesktop;
+      this.campForm.value.browser.mobile = this.selectedBrowserMobile;
+      this.campForm.value.banSiteList = this.banSiteList;
+      console.log("Form Submitted!");
+      console.log(this.campForm.value);
+    }
+  }
 
-  private removeCampAlert : boolean = false;
-  removeCampaign(){
+  banSites() {
+    this.banSiteList.push(this.banSite);
+    this.banSite = "";
+    console.log(this.banSiteList);
+  }
+
+  delBanSite(e, index) {
+    this.banSiteList.splice(index, 1)
+  }
+
+  saveCamp() {
+    let campDetails = {
+      title: this.campTitle,
+      hours: this.selectedHours,
+      devices: this.selectedDevices,
+      countries: this.selectedCountries,
+      os: { desktopOs: this.selectedOsDesktop, mobileOs: this.selectedOsMobile },
+      browser: { desktopBrowser: this.selectedBrowserDesktop, mobileBrowser: this.selectedBrowserMobile },
+      sitesToKeepOut: this.banSiteList,
+      // startDate: 
+    }
+    console.log('event');
+  }
+
+  private removeCampAlert: boolean = false;
+  removeCampaign() {
     this.removeCampAlert = true;
     setTimeout(() => {
       this.removeCampAlert = false;
     }, 3000);
   }
 
-  selectAllCoutries(){
+  selectAllCoutries() {
     this.selectedCountries = this.selectAll(this.countries, this.selectedCountries);
   }
 
-  deSelectAllCoutries(){
+  deSelectAllCoutries() {
     this.selectedCountries = this.deSelectAll(this.countries, this.selectedCountries);
   }
 
-  selectAllDevice(){
+  selectAllDevice() {
     this.selectedDevices = this.selectAll(this.devices, this.selectedDevices);
   }
 
-  deSelectAllDevice(){
+  deSelectAllDevice() {
     this.selectedDevices = this.deSelectAll(this.devices, this.selectedDevices);
   }
 
-  selectAllhours(){
+  selectAllhours() {
     this.selectedHours = this.selectAll(this.hours, this.selectedHours);
   }
 
-  deSelectAllhours(){
+  deSelectAllhours() {
     this.selectedHours = this.deSelectAll(this.hours, this.selectedHours);
   }
 
-  selectAllOs(){
+  selectAllOs() {
     this.selectedOsDesktop = this.selectAll(this.osListDesktop, this.selectedOsDesktop);
     this.selectedOsMobile = this.selectAll(this.osListMobile, this.selectedOsMobile);
   }
 
-  deSelectAllOs(){
+  deSelectAllOs() {
     this.selectedOsDesktop = this.deSelectAll(this.osListDesktop, this.selectedOsDesktop);
     this.selectedOsMobile = this.deSelectAll(this.osListMobile, this.selectedOsMobile);
   }
 
-  selectAllBrowser(){
+  selectAllBrowser() {
     this.selectedBrowserDesktop = this.selectAll(this.browserListDesktop, this.selectedBrowserDesktop);
     this.selectedBrowserMobile = this.selectAll(this.browserListMobile, this.selectedBrowserMobile);
   }
 
-  deSelectAllBrowser(){
+  deSelectAllBrowser() {
     this.selectedBrowserDesktop = this.deSelectAll(this.browserListDesktop, this.selectedBrowserDesktop);
     this.selectedBrowserMobile = this.deSelectAll(this.browserListMobile, this.selectedBrowserMobile);
   }
@@ -155,7 +222,7 @@ export class CampViewComponent implements OnInit {
     selectedArray = [];
     for (let i = 0; i < array.length; i++) {
       array[i].select = true;    // set select = true.
-  // update selected array list
+      // update selected array list
       let first;
       for (let k in array[i]) {
         if (array[i].hasOwnProperty(k) && typeof (k) !== 'function') {
@@ -169,11 +236,11 @@ export class CampViewComponent implements OnInit {
     return selectedArray;
   }
 
-  deSelectAll(array, selectedArray){
+  deSelectAll(array, selectedArray) {
     selectedArray = [];
-    for (let i = 0; i < array.length; i++) 
+    for (let i = 0; i < array.length; i++)
       array[i].select = false;    // set select = false.
-      return selectedArray;
+    return selectedArray;
   }
 
 
@@ -221,7 +288,7 @@ export class CampViewComponent implements OnInit {
     arrA = [];
     for (let i = 0; i < arrB.length; i++) {
       if (arrB[i].select === true)
-        arrA.push(arrB[i].desktopOs);
+        arrA.push(arrB[i].mobileOs);
     }
     return arrA;
   }
