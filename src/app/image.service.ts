@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ImageService {
 
-  private _getUrl = "/getImages";
+  private _getUrl = "/uploadimage/getImages";
 
   constructor(private _http: Http) { }
 

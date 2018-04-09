@@ -13,15 +13,17 @@ mongoose.connect(db, function (err) {
 
 router.get('/getImages', function (req, res) {
     console.log('Get request for all Images');
-    User.find({})
-        .exec(function (err, photos) {
-            if (err) {
-                console.log('Error retrieving Images');
-            } else {
-                console.log(photos);
-                // res.json(photos);
-            }
-        });
+    // User.find({})
+    //     .exec(function (err, photos) {
+    //         if (err) {
+    //             console.log('Error retrieving Images');
+    //         } else {
+    //             console.log(photos);
+    //             // res.json(photos);
+    //             res.send("get images route");
+    //         }
+    //     });
+    res.send("get images route");
 });
 
 
