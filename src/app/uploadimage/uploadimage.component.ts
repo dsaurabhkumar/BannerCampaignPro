@@ -8,12 +8,17 @@ import { ImageService } from '../image.service';
 })
 export class UploadimageComponent implements OnInit {
 
+  onClickDelete(){
+    
+  }
+
   public images: any;
   message: string;
   constructor(private _imageService: ImageService) { }
 
   ngOnInit() {
     this._imageService.getImages().subscribe(response => this.images = response)
+    this._imageService.deleteImages().subscribe(response => this.images = response)
   }
 
 }

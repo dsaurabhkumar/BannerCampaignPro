@@ -12,6 +12,8 @@ mongoose.connect(db, function (err) {
         console.log('db connected');
 });
 
+//To get the images from the mongodb Database
+
 router.get('/getImages', function (req, res) {
     console.log('Get request for all Images');
     User.find({})
@@ -23,8 +25,20 @@ router.get('/getImages', function (req, res) {
                 res.json(photos);
             }
         });
-    // res.json({ "value": "sdkfjlksjflds"});
 });
+
+//To delete the images from the database based on Id
+
+router.delete('/deleteImages/:id', function(req, res){
+    console.log('Deleting an image based on Id');
+    User.findByIdAndRemove(req.params.id, function(err, deletedPhoto){
+        if(err){
+            res.send("Error deleting an Image");
+        }else{
+            res.json(deletedPhoto);
+        }
+    })
+})
 
 
 module.exports = router;

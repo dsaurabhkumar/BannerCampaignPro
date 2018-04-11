@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class ImageService {
 
   private _urlGetImages = "http://localhost:3000/uploadimage/getImages";
+  private _urlDeleteImages = "http://localhost:3000/uploadimage/deleteImages/:id";
 
   constructor(private _http: Http, private httpClient: HttpClient) { }
 
@@ -18,6 +19,10 @@ export class ImageService {
 
   getImages(): Observable<IGetImages> {
     return this.httpClient.get<IGetImages>(this._urlGetImages);
+  }
+
+  deleteImages(){
+    return this.httpClient.delete(this._urlDeleteImages);
   }
 
 

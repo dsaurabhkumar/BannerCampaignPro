@@ -13,7 +13,7 @@ var storage = multer.diskStorage({
     callback(null, './uploads');
   },
   filename: function (req, file, callback) {
-    callback(null, file.fieldname + '-' + Date.now() + file.originalname);
+    callback(null, file.fieldname + '-' + file.originalname);
   }
 });
 var upload = multer({ storage: storage, limits: { fileSize: maxSize } }).array('photo', 20);
@@ -31,12 +31,9 @@ router.post('/', function (req, res) {
     //To store the data into MongoDB Database
 
     const user = new User({ "fileName": req.files[0].filename, "path": req.files[0].path, "size": req.files[0].size });
-    console.log(user.size+"komal");
     if (user.size > 100000) {    // condition to check the size of image is more than or less than 100kb.
       console.log("Limit Exceeds...!!! Can't Upload file");
-      
     } else {
-      console.log("ida kida");
       user.save().then(function () {
         console.log("User has been Inserted");
       }).catch(function () {
