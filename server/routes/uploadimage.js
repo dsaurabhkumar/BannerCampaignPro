@@ -37,7 +37,7 @@ router.delete('/deleteImages/:id', function(req, res){
         }else{
             res.json(deletedPhoto);
         }
-    })
+    });
 })
 
 

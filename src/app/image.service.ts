@@ -3,6 +3,7 @@ import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { IGetImages } from './intGetImages';
 import { HttpClient } from '@angular/common/http';
+import { IDeleteImage } from './intDeleteImage';
 
 @Injectable()
 export class ImageService {
@@ -21,8 +22,8 @@ export class ImageService {
     return this.httpClient.get<IGetImages>(this._urlGetImages);
   }
 
-  deleteImages(){
-    return this.httpClient.delete(this._urlDeleteImages);
+  deleteImages(): Observable<IDeleteImage>{
+    return this.httpClient.post<IDeleteImage>(this._urlDeleteImages, {id:"5acd94def1d0e23138fdf9aa"});
   }
 
 

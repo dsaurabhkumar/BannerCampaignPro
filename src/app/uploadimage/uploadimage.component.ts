@@ -8,7 +8,7 @@ import { ImageService } from '../image.service';
 })
 export class UploadimageComponent implements OnInit {
 
-  onClickDelete(){
+  onClickDelete(id){
     
   }
 
